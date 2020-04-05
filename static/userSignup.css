@@ -1,0 +1,144 @@
+*{
+    margin: 0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+body{
+    font-family: 'Amarante', cursive;
+}
+button{
+    font-family: 'Amarante', cursive;
+}
+header{
+    display:flex;
+    /* background-color: lightblue; */
+    width:90%;
+    margin:auto;
+    height:10vh;
+    align-items: center;
+}
+.logo-container,.nav-links,.notifications{
+    display:flex;
+}
+.logo-container{
+
+   
+    flex:1;
+
+}
+.logo{
+    font-weight:400;
+    margin:5px;
+}
+
+.presentation{
+    display:flex;
+    width:90%;
+    margin: auto;
+    min-height: 80vh;
+    align-items: center;
+}
+ .introduction{
+  
+    flex:1;
+   
+} 
+.intro-text h3{
+    font-size:44px;
+    font-weight: 500;
+    background: linear-gradient(to right,#494964,#6f6f89);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+
+.intro-text p{
+    margin-top:5px;
+    font-size:22px;
+    color:#585772
+}
+
+.signin{
+    /* flex:1; */
+    /* background: #585772; */
+    background: #68e1fd;
+    opacity: 1;
+    padding:20px;
+    width:300px;
+    margin:auto;
+    margin-top:0px;
+    height: 450px;
+    /* margin-left:180x; */
+}
+
+form{
+    margin-top:10px;
+    width:260px;
+    text-align: center;
+}
+
+input{
+    width:260px;
+    background: transparent;
+    border:none;
+    border-bottom: 1px solid #fff;
+    font-size: 16px;
+    font-weight:200px;
+    padding:10px 0;
+    transition: border 0.5s;
+    outline:none;
+    color:#fff;
+}
+.signup-user{
+    background:white;
+    width:150px;
+    height:50px;
+    cursor: pointer;
+    font-size:16px;
+    line-height: 25px;
+    border: none;
+    color:#007BFF;
+    border-radius: 15px;
+    padding:10px 0;
+  
+}
+.signup-user:hover{
+    color:#fff;
+    background:#007BFF;
+    outline: none;
+}
+
+::placeholder{
+    color:#fff;
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+.big-circle{
+    position: absolute;
+    top:0px;
+    right:0px;
+    z-index:-1;
+    height:80%;
+}
+.medium-circle{
+    position: absolute;
+    top:30%;
+    right:30%;
+    z-index:-1;
+    height:60%;
+    opacity: 0.4;
+}
+
+.small-circle{
+    position:absolute;
+    bottom:0%;
+    left:20%;
+    z-index:-1;
+}

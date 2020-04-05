@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Voice Prescription || Register</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       
+        <link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+        <link href="{{ url_for('static', filename='userSignup.css') }}" rel="stylesheet"> 
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{url_for('static',filename='logo.svg')}}" alt="logo">
+            <h4 class="logo">Voice Prescription</h4>
+        </div>
+      
+   
+    </header>
+    <main>
+        <section class="presentation">
+            <div class="intoduction">
+                <div class="intro-text">
+                  <img src="{{url_for('static',filename='doctor.svg')}}" alt="" style="height:200px;margin-left:0%">
+                    <h3>Doctor</h3>
+                     <p>Sign Up</p> 
+                </div>
+            </div>
+            <div class="signin">
+                <form  method="POST"  action="{{ url_for('doctor_register') }}" enctype="multipart/form-data">
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <label for="fileupload" style="color:#fff;opacity:0.8;">Upload Profile Pic</label>
+                    <input type="file" class="form-control" name="imagefile" placeholder="Profile Pic"required>
+                    <label for="fileupload" style="color:#fff;opacity: 0.8;">Choose Speciality</label>
+                    <select name="speciality" style="width:260px;background: transparent;border:none;
+                    border-bottom: 1px solid #fff;
+                    font-size: 16px;
+                    font-weight:200px;
+                    padding:10px 0;
+                    transition: border 0.5s;
+                    outline:none;
+                    color:#fff;" required>
+                      {% for department in department_list %}
+                      <option style="color:black;" value="{{ department[1] }}">{{ department[1] }}</option>
+                      {% endfor %}
+                    </select><br><br>
+                    <button type="submit" class="signup-user">Signup</button>
+                    <div style="color:white;">Already have an account?</div><a href="{{url_for('doctor_login')}}">&nbsp;Sign IN</a>
+                    
+                </form>
+            </div>
+        </section>
+
+
+        <img class="big-circle"src="{{url_for('static',filename='big-eclipse.svg')}}" alt=""/>
+        <img class="medium-circle" src="{{url_for('static',filename='mid-eclipse.svg')}}" alt=""/>
+        <img  class="small-circle" src="{{url_for('static',filename='small-eclipse.svg')}}" alt=""/>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Register</title>
+
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+  </head>
+  <body>
+
+  
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Questions & Answers</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('doctor_login') }}">Doctor_Login</a></li>
+            <li><a href="{{ url_for('doctor_register') }}">Doctor_Register</a></li>
+           
+            <li><a href="{{ url_for('ask') }}">Ask Question</a></li>
+            <li><a href="{{ url_for('unanswered') }}">Answer Questions</a></li>
+
+            <li><a href="{{ url_for('doctors') }}">Doctor Setup</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="page-header">
+        <h1>Register</h1>
+      </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST" action="{{ url_for('doctor_register') }}" enctype="multipart/form-data">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="inputName" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="email" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fileupload" class="col-lg-2 control-label">Upload</label>
+                    <div class="col-lg-10">
+                      <input type="file" class="form-control" name="imagefile">
+                  </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="fileupload" class="col-lg-2 control-label">Choose speciality</label>
+                    <div class="col-lg-10">
+                      <select name="speciality">
+                        {% for department in department_list %}
+                        <option style="color:black;" value="{{ department[1] }}">{{ department[1] }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+
+    </div> 
+
+  </body>
+</html> -->

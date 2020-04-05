@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Voice Prescription || Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       
+        <link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+        <link href="{{ url_for('static', filename='userLogin.css') }}" rel="stylesheet"> 
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="{{url_for('static',filename='logo.svg')}}" alt="logo">
+            <h4 class="logo">Voice Prescription</h4>
+        </div>
+      
+   
+    </header>
+    <main>
+        <section class="presentation">
+            <div class="intoduction">
+                <div class="intro-text">
+                  <img src="{{url_for('static',filename='user_profile.svg')}}" alt="" style="height:100px;margin-left:-20%;">
+                    <h3>User</h3>
+                     <p>Sign In</p> 
+                </div>
+            </div>
+            <div class="signin">
+                <form action="{{ url_for('user_login') }}" method="POST">
+                    <input type="text" name="email" placeholder="Email" required>
+                    <input type="password" name="password" placeholder="Password" required><br><br>
+                    <button type="submit" class="login-user">Login</button><br><br><br><br><br><br><br>
+                    <div style="color:white;">Don't have an account?</div><a href="{{url_for('user_register')}}">&nbsp;Sign Up</a>
+                    
+                </form>
+            </div>
+        </section>
+
+
+        <img class="big-circle"src="{{url_for('static',filename='big-eclipse.svg')}}" alt=""/>
+        <img class="medium-circle" src="{{url_for('static',filename='mid-eclipse.svg')}}" alt=""/>
+        <img  class="small-circle" src="{{url_for('static',filename='small-eclipse.svg')}}" alt=""/>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <title>Login</title>
+
+    
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">    
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Questions & Answers</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('user_login') }}">User_Login</a></li>
+
+            <li><a href="{{ url_for('user_register') }}">User_Register</a></li>
+            
+
+            <li><a href="{{ url_for('ask') }}">Ask Question</a></li>
+            <li><a href="{{ url_for('unanswered') }}">Answer Questions</a></li>
+            <li><a href="{{ url_for('doctors') }}">Doctor Setup</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="page-header">
+        <h1>Login</h1>
+      </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="well bs-component">
+              <form class="form-horizontal" method="POST" action="{{ url_for('user_login') }}">
+                <fieldset>
+                  <div class="form-group">
+                    <label for="inputName" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" name="email" id="inputName" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                    <div class="col-lg-10">
+                      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                      <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+  </body>
+</html> -->

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='sign.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+      </div>
+      <div class="jumbotron">
+        <h3 class="jumbotronHeading">Please Sign within the box</h3>
+    <div class="slidecontainer">
+      <p>Drag the slider to change the line width.</p>
+      <input type="range" min="10" max="50" value="15" id="myRange">
+      <p>Value: <span id="sliderValue"></span></p>
+    </div>
+    <div class="canvasDiv">
+          <canvas id="canvas" width="280" height="280"></canvas>
+          <br>
+          <p style="text-align:center;">
+            <a class="btn btn-success myButton" href="#" role="button">Save</a>
+            <a class="btn btn-primary" href="#" id="clearButton" role="button">Clear</a>
+        </p>
+        </div>
+      </div>
+      <div class="jumbotron">
+        <p id="result">Remarks</p>
+      </div>
+    </div> <!-- /container -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='sign.js') }}"></script>
+    <script type="text/javascript">
+     
+    $(".myButton").click(function(){
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      var canvasObj = document.getElementById("canvas");
+      var img = canvasObj.toDataURL();
+      console.log(typeof(img));
+      $.ajax({
+        type: "POST",
+        url: $SCRIPT_ROOT + "{{ url_for('sign') }}",
+        data: img,
+        success: function(data){
+          $('#result').text(' Predicted Output: '+data);
+        }
+      }); 
+    });
+
+  
+   
+     </script>
+  </body>
+</html>
+

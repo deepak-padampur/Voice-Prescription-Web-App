@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Unanswered Problems</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{url_for('static',filename='unanswered.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <header class="navbar fixed-top">
+    <div class="logo-container">
+        <img src="{{url_for('static',filename='logo.svg')}}" alt="logo">
+        <h4 class="logo">Voice Prescription</h4>
+    </div>
+    <nav >
+        <ul class="nav-links">
+            <li ><a href="#" class="nav-link">Prescription</a></li>
+            <li ><a href="#" class="nav-link">History</a></li >
+            <li ><a href="#" class="nav-link">Profile:{{session.doctor}}</a></li>
+            {% if doctor %}
+            <li><a href="{{ url_for('answer') }}" class="black-text">User Setup</a></li>
+            <li><a href="#" class="black-text" class="mic-nav black-text">Microphone</a></li>
+      
+            <li><a href="{{ url_for('logout') }}" class="black-text">Logout</a></li>
+           
+            {% endif %}
+        </ul>
+   
+    </nav>
+    <div class="notifications">
+       
+        <img src="{{url_for('static',filename='notify.png')}}" alt="">
+        <div id="notification" class="badge badge-primary">1</div>
+       
+    </div>
+   </header>
+
+   <main>
+     {% for query in query_all %}
+     <div class="problem-post">
+       <div class="problem-post_info">
+         {% if query['doc_email'] == doctor['email'] %}
+         <h5 class="problem-post_title">Problem:{{ query['problem_specification'] }}</h5>
+         <p class="problem-post_text"> Asked by: {{ query['user_email'] }}</p>
+         <a href="{{url_for('answer')}}?email={{ query['user_email'] }}" class="problem-post_cta">Prescribe</a> 
+         {% endif %}       
+       </div>
+      </div>
+     {% endfor %}
+   </main>
+  
+  
+   
+      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Unaswered Questions</title>
+
+    
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Questions & Answers</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            {% if not user %}
+            <li><a href="{{ url_for('user_login') }}">User_Login</a></li>
+            <li><a href="{{ url_for('doctor_login') }}">Doctor_Login</a></li>
+            <li><a href="{{ url_for('user_register') }}">User_Register</a></li>
+            <li><a href="{{ url_for('doctor_register') }}">Doctor_Register</a></li>
+            {% endif %}
+            {% if user and user['admin'] == 0 and user['expert'] == 0 %}
+            <li><a href="{{ url_for('ask') }}">Ask Question</a></li>
+            {% endif %}
+            {% if user and user['expert'] == 1 %}
+            <li><a href="{{ url_for('unanswered') }}">Answer Questions</a></li>
+            {% endif %}
+            {% if user and user['admin'] == 1 %}
+            <li><a href="{{ url_for('doctors') }}">Doctor Setup</a></li>
+            {% endif %}
+            {% if user %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="page-header">
+        <h1>Questions For You</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+            {% for question in unanswered_questions %}
+                <a href="{{url_for('answer')}}" class="list-group-item">
+                  <h4 class="list-group-item-heading">{{ 
+                  question['problem_specification'] }}</h4>
+                  <p class="list-group-item-text">Asked by: {{ question['email'] }}</p>
+                 
+                </a>
+              
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+</html> -->

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voice Prescription || ASK </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='ask.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='profile.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+   
+  
+</head>
+<body>
+    <header class="navbar fixed-top">
+        <div class="logo-container">
+            <img src="{{url_for('static',filename='logo.svg')}}" alt="logo">
+            <h4 class="logo">Voice Prescription</h4>
+        </div>
+        <nav >
+            <ul class="nav-links">
+                <li ><a href="#" class="nav-link">Prescription</a></li>
+                <li ><a href="#" class="nav-link">History</a></li >
+                <li ><a href="#" class="nav-link">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="notifications">
+           
+            <img src="{{url_for('static',filename='notify.png')}}" alt="">
+            <div id="notification" class="badge badge-primary">1</div>
+           
+        </div>
+    </header>
+
+
+    <!---Modal-------------------------------------------------------->
+
+    <div class="modal fade" id="preview-problem">
+      <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Recheck Your Specified Problem for better Recommendation</h3>
+
+        </div>
+        <div class="modal-body">
+       
+     <form action="{{ url_for('ask') }}" method="POST"> 
+      <table class="table table-striped">
+        <tbody>
+          <tr>
+            <th scope="row">Name</th>
+            <td id="name">{{session.username}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Age</th>
+            <td id="age"></td>
+          </tr>
+          <tr>
+            <th scope="row">Symptoms</th>
+            <td><input type="text"name="sym"  id="symptomsPatient" value="I have the symptoms of hand fracture" style="background: transparent;border: none;width:100%;"required></td>
+            
+          </tr>
+        </tbody>
+        </table>
+  
+
+        </div>
+        <div class="modal-footer">
+          <!-- <button class="btn btn-default" onclick="submit(e);">Agree</button>url for recommendation goes here.. -->
+          <!-- <button class="btn btn-default" data-dismiss="modal">Disagree</button>submit.apply(this,arguments) -->
+
+          
+           <button class="btn btn-primary" type="submit" onclick="norefresh()">Agree</button>
+          <button class="btn btn-default" data-dismiss="modal">Disagree</button>
+
+        </div>
+        </form>  
+      </div>
+      </div>
+    </div>
+
+
+
+
+     <!---Modal-------------------------------------------------------->
+
+    <main>
+        <section class="presentation">
+            <div class="introduction">
+                <div class="intro-text">
+                    <img src="{{url_for('static',filename='password.svg')}}" alt="" style="width:100px;margin-left:0%;">
+                    <h3>Choose Your Language</h3>
+                    <!-- <p class="dept-name">{{ final_prediction }}</p> -->
+                    <p class="languageGenerated">{{ changed_lang }}</p>
+                    <h3></h3>
+                    <!-- <p>Verbal Commmunication,Make Life Easier</p> -->
+                </div>
+                <div class="call-to-action">
+                    <button class="cta-english">English</button>
+                    <button class="cta-hindi">हिंदी</button>
+                    <button class="cta-bengali">Bengali</button>
+                    <button class="cta-marathi">Marathi</button>
+                    <button class="cta-telugu">Telugu</button>
+                    <button class="cta-tamil">Tamil</button>
+                    <button class="cta-guj" style="border:2px solid #68e1fd;background: transparent;
+                    color:#68e1fd;
+                    width:150px;
+                    height:50px;
+                    cursor: pointer;
+                    font-size:16px;
+                    margin:30px 0px 0px 30px;">Gujarati</button>
+<!--                     
+                    <button lang="hi"class="cta-kannad">Kannada</button>
+                    <button lang="hi"class="cta-urdu" style="   border:2px solid #68e1fd;
+                    background: transparent;
+                    color:#68e1fd;
+                    width:150px;
+                    height:50px;
+                    cursor: pointer;
+                    font-size:16px;
+                    margin:30px 0px 0px 30px;">Urdu</button>                   
+                    -->
+                </div>
+            </div>
+           
+            <div class="cover-chat">
+                <!--Chat box goes here-->
+            
+                
+                
+                <div class="msg-header">
+                    
+                  
+                    <div class="active">
+                        <h4>{{session.username}}</h4>
+                       
+                    </div>
+                    <div class="header-icons">
+                        <i class="fa fa-microphone mic"data-toggle="tooltip" data-placement="top" title="Activate Microphone"></i>
+                        <i class="fa fa-microphone-slash mic-stop"data-toggle="tooltip" data-placement="top" title="Deactivate Microphone"></i>
+                        <i class="fa fa-info"data-toggle="modal" title="Preview of you problem"  data-target="#preview-problem"></i>
+                     
+
+                    </div>
+                </div>
+                <div class="chat-page">
+                    <div class="msg-inbox">
+                        <div class="chats">
+                            <div class="msg-page">
+                                 <!-- <div class="bot-charts">
+                                    <div class="received-msg">
+                                        <div class="received-msg-inbox">
+                                        
+                                          
+                                            <p class="bot-content">Hi!!I am your Assistant</p> 
+                                            <span class="time">1:31 || January 30</span>
+                                        </div>
+                                    </div>
+                                </div>  -->
+                                 <!-- <div class="user-charts">
+                                     <div class="outgoing-msg"> 
+                                        <div class="outgoing-msg-inbox">
+                                        
+                                            <p class="user-content">Hi !! this is message from User</p>
+                                           
+                                            <span class="time">1:32 || January 30</span>
+                                        </div>
+                                     </div> 
+                                </div>  -->
+                              
+                              
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg-bottom">
+                        <!-- <div class="bottom-icons">
+                            <i class="fa fa-plus-circle"></i>
+                            
+                        </div> -->
+                        <div class="input-group">
+                            <input type="file" name="previous Prescription"  class="form-control"id="">
+                            <div class="input-file-append">
+                                <span class="input-file"><i class="fa fa-paper-plane"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <div class="chat-button">
+            <button class="mic-chat">Activate Microphone & Chat</button>
+        </div>
+        <img class="big-circle"src="{{url_for('static',filename='big-eclipse.svg')}}" alt=""/>
+        <img class="medium-circle" src="{{url_for('static',filename='mid-eclipse.svg')}}" alt=""/>
+        <img  class="small-circle" src="{{url_for('static',filename='small-eclipse.svg')}}" alt=""/>
+       
+    </main><br><br><br>
+    <!---Recommended doctors-->
+    <section id="doctors">
+        <div class="container my-3 py-5 text-center">
+            <div class="row mb-5">
+                <div class="col">
+                    <h1><u>Recommended Doctors For You</u></h1>
+                    <p class="predictionDept">{{ final_prediction }}</p>
+                </div>
+            </div>
+          
+                <div class="recommend" style="display: flex;flex-wrap: wrap;justify-content: space-around;">
+                    <!-- <div class="card-doctor">
+                        <img id="docimg"src="{{url_for('static',filename='download.jpeg')}}" alt="Doctors Pic"style="width:150px;height:auto;padding-top:10px;">
+                        <h1 id="docname">Doctor's Name</h1>
+                        <p id="speciality"class="title">Speciality</p>
+                        <p id="degree">Designation..</p>
+                        <p>Price..</p>
+                        <p>Rating...</p>
+                        <p><button style="border:none;padding:8px;display: inline-block;color:#fff;background-color: #646464;width:70%;border-radius:20px;font-size:18px;text-align:center;cursor: pointer;">Consult</button></p>
+                      
+
+                    </div> -->
+                </div> 
+            
+          
+        </div>
+
+    </section>
+
+     <!---Recommended doctors ends-->
+ 
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+     <script src="{{url_for('static',filename='profile.js')}}?ver={{ random }}"></script>
+    <script src="{{url_for('static',filename='ask.js')}}?ver={{ random }}"></script> 
+  
+    
+  
+    
+  
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
+          document.querySelectorAll('.time').forEach(el=>{
+            console.log('Previous='+el.previousElementSibling);
+        })
+ 
+    function norefresh(event){
+        event.preventDefault();
+    }
+  
+  
+         
+
+       
+    </script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+  
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Voice Prescription || SIH 2020</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h3 id="logo">Voice Prescription App</h3>
+            <!-- <img src="./img/menu.svg" alt="hamburger" class="hamburger"> -->
+            <svg class="hamburger"fill="#000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 23" width="43" height="23" fill="none">
+            <line y1="1.5" x2="43" y2="1.5" stroke="black" stroke-width="3"/>
+            <line y1="11.5" x2="28" y2="11.5" stroke="black" stroke-width="3"/>
+            <line y1="21.5" x2="16" y2="21.5" stroke="black" stroke-width="3"/>
+            </svg>
+            <div class="nav-open" style="display:flex;justify-content: space-around;">
+               <div class="doctor">
+                <img src="{{url_for('static',filename='user_profile.svg')}}" alt="" style="width:100%;height:80px;">
+                <div class="page-link">
+                    <a class="btn btn-primary" href="{{ url_for('user_register') }}">SignUp</a>
+                    <a class="btn btn-primary" href="{{ url_for('user_login') }}" class="btn">Login</a>
+
+                </div>
+               </div>
+               <div class="pages">
+                  
+                   <img src="{{url_for('static',filename='doctor.svg')}}" alt="" style="width:100%;height:100px;">
+                <div class="page-link">
+                <a class="btn btn-primary" href="{{ url_for('doctor_register') }}">SignUp</a>
+                <a  class="btn btn-primary" href="{{ url_for('doctor_login') }}">Login</a>
+              </div>
+            </div>
+            <div class="admin">
+                <img src="{{url_for('static',filename='checklist_.svg')}}" alt="" style="width:100%;height:100px;">
+                <div class="page-link">
+                    <a class="btn btn-primary" href="{{ url_for('doctors') }}">Admin</a>
+                </div>
+
+
+            </div>
+                
+            </div>
+          
+        </nav>
+        <section>   
+            <div class="theme">
+                <img src="{{url_for('static',filename='podcast.svg')}}" alt="" style="width:100%;height:530px;z-index:4">
+               
+
+                <h1 class="headline" style="color:#fff">Consult</h1>
+            
+            </div>
+        </section>
+    </header>
+
+    <div class="slider">
+
+    </div>
+
+  
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha256-lPE3wjN2a7ABWHbGz7+MKBJaykyzqCbU96BJWjio86U=" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha256-fIkQKQryItPqpaWZbtwG25Jp2p5ujqo/NwJrfqAB+Qk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js"></script>
+    <script src="{{url_for('static',filename='home.js')}}"></script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Questions & Answers</title>
+
+
+    <link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+    
+    <link href="{{ url_for('static', filename='theme.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Questions & Answers</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            
+            <li><a href="{{ url_for('user_login') }}">User_Login</a></li>
+            <li><a href="{{ url_for('doctor_login') }}">Doctor_Login</a></li>
+            <li><a href="{{ url_for('user_register') }}">User_Register</a></li>
+            <li><a href="{{ url_for('doctor_register') }}">Doctor_Register</a></li>
+            
+            <li><a href="{{ url_for('ask') }}">Ask Question</a></li>
+            <li><a href="{{ url_for('unanswered') }}">Answer Questions</a></li>
+            <li><a href="{{ url_for('doctors') }}">Doctor Setup</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+
+      <div class="page-header">
+        <h1>Answered Questions</h1>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="list-group">
+             <a href="#" class="list-group-item">
+              <h4 class="list-group-item-heading"> question['question_text']  </h4>
+              <p class="list-group-item-text">Asked by:  question['asker_name']  </p>
+              <p class="list-group-item-text">Answered by: question['expert_name']  </p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div> 
+
+  </body>
+</html> -->

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Answer To Problems</title>
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/css?family=Amarante&display=swap" rel="stylesheet">
+         <script src="../static/jspdf.min.js"></script> 
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  </head>
+
+  <body style="font-family: 'Amarante', cursive;background-color: #f5f8fd;">
+    <nav class="white">
+      <div class="nav-wrapper">
+       
+        <a href="#" class="brand-logo  black-text"> <i class="large material-icons">record_voice_over
+        </i>Prescribe Medicine</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down black-text">
+          {% if not doctor %}
+          <li><a href="{{ url_for('doctor_login') }}" class="black-text">Login</a></li>
+          <li><a href="{{ url_for('doctor_register') }}"class="black-text">Register</a></li>
+          {% endif %}
+        
+          {% if doctor %}
+   
+          <li><a href="#" class="black-text" class="mic-nav black-text">Microphone</a></li>
+          <li><a href="{{ url_for('sign') }}" class="black-text">Sign Here</a></li>
+      
+          <li><a href="{{ url_for('logout') }}" class="black-text">Logout</a></li>
+         
+          {% endif %}
+         
+      
+        </ul>
+       
+      </div>
+     
+    </nav>
+
+
+    <!--help modal-->
+    <div id="modal-help" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h4>Command</h4>
+        <p>Command Related to this page goes here</p>
+        <ul>
+          <li>Name:May Be in any format</li>
+          <li>Age:Should contain keywords 'years old','years'</li>
+          <li>Symptoms:keywords- 'Symptoms'</li>
+          <li>Dignosis:'disease'</li>
+          <li>Medicines-'Medicines'</li>
+          <li>Advice:'should','recommend'</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+      </div>
+    </div>
+    <!--prescription preview-->
+    <div id="pres-table" class="modal">
+      <div class="modal-content">
+        <table class="striped" id="pdf">
+          <tr>
+            <th>Prescription For</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Name</th>
+          <td contenteditable>{{name}}</td>
+          </tr>
+          <tr>
+            <th>Age</th>
+            <td contenteditable>{{age}}</td>
+          </tr>
+          <tr>
+            <th>Symptoms</th>
+            <td contenteditable>{{tabledata}}</td>
+          </tr>
+          <tr>
+            <th>Diagnosis</th>
+            <td contenteditable>{{disease}}</td>
+          </tr>
+          <tr>
+            <th>Prescription</th>
+            <td contenteditable>{{medicine}}</td>
+          </tr>
+          <tr>
+            <th>Advice</th>
+            <td contenteditable>{{advice}}</td>
+          </tr>
+          <tr>
+            <th>Signature</th>
+          <!-- <td><img src="{{url_for('static',filename='output.png')}}" id="signature"style="width:30%;height:15%;"alt=""></td> -->
+          </tr>
+          
+           
+          
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <a class="btn agree"onclick="genPDF()">GENERATE PDF</a>
+        <button class="btn disagree">DISAGREE</button>
+      </div>
+    </div>
+   
+
+
+    <div class="row col s12 m6 l6" >
+      <div class="col  s6 offset-s3">
+       <form action="{{ url_for('nlp') }}" method="POST">
+        <div class="card" style="margin-top:15%;">
+          <div class="card-content">
+            <div class="card-title" style="text-align:center;">
+              <u >Prescribe</u>
+              
+
+              
+            </div>
+            <span class="content"></span>
+          </div>
+          <div class="card-action" style="text-align:center;">
+            
+            <a class="btn-floating btn-large  microphone"><i class="material-icons">mic</i></a>
+            <button class="waves-effect btn modal-trigger right" type="submit" >SUBMIT &rarr;</button>
+             
+          </div>
+        </div>
+       </form>
+        <a class="waves-effect waves-light btn modal-trigger help" href="#modal-help">Help</a>
+        <button data-target="pres-table" class="btn modal-trigger">PREVIEW &rarr;</button><br><br>
+        
+           <div class="card">
+            <form action="url_for('mail')" method="POST" enctype="multipart/form-data">
+              <input type="file" name="prescription" id="">
+              <a type="submit" class="btn"href="">Upload</a>
+
+            </form>
+           </div>
+
+                  <a type="submit" class="btn"href="{{url_for('mail')}}?email={{email}}">Send mail &rarr;</a> 
+
+          
+      
+          
+           
+        
+       
+      </div>
+  
+    
+      </div>
+
+      <!-- <a id="menu" class="waves-effect waves-light btn btn-floating" ><i class="material-icons">menu</i></a> -->
+
+      <!-- Tap Target Structure -->
+      <div class="tap-target" data-target="menu">
+        <div class="tap-target-content">
+          <h5>Title</h5>
+          <p>A bunch of text</p>
+        </div>
+      </div>
+      <!-- <div id="my-canvas">
+       <embed src="0.12800562831277573_pres.pdf" type="" width="400px" height="100px"/>
+      </div> -->
+
+
+      <script>
+        $(document).ready(function(){
+          $('.modal').modal();
+        });
+
+  $(document).ready(function(){
+    $('.tap-target').tapTarget();
+  });
+      </script>
+
+      <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.2.228/build/pdf.min.js"></script>
+      
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </body>
+  <script type="text/javascript">
+
+    function sentenceCase(input, lowercaseBefore) {
+      input = ( input === undefined || input === null ) ? '' : input;
+      if (lowercaseBefore) { input = input.toLowerCase(); }
+      return input.toString().replace( /(^|\. *)([a-z])/g, function(match, separator, char) {
+          return separator + char.toUpperCase();
+      });
+  }
+      javascript_data=null;
+      var javascript_string="";
+      var Text_content="";
+      btn= document.querySelector('.microphone');
+      const SpeechRecognition= window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      //To make the microphone continuous
+      recognition.interimResults=true;
+     // let transcript="";
+      //let span=document.createElement('span');
+      const contents=document.querySelector('.content');
+      //contents.appendChild(span); 
+  
+      recognition.onstart=()=>{
+        console.log('Microphone has beeen activated you can ask now');
+        btn.classList.toggle('pulse');
+       // alert('Microphone has beeen activated you can ask now');
+      }
+      recognition.onresult=(event)=>{
+        console.log(event.results);
+        const transcript=Array.from(event.results).map(result=>result[0]).map(result=>result.transcript).join('');
+        console.log(transcript);
+     
+        if(event.results[0].isFinal){
+         
+         javascript_string+=transcript+" ";
+        
+        contents.textContent=javascript_string;
+        document.querySelector('.modal-cvaontent').textContent=javascript_string;
+       
+      
+
+       }
+       // Text_content=document.getElementsByTagName('span').innerText;
+       Text_content=document.querySelector('.content').innerText;
+       console.log("Text_content="+Text_content)
+        console.log('javacsriptstring='+javascript_string);
+        if(javascript_string.includes('exit')){
+          console.log('omit');
+          document.querySelector('.help').style.display="none";
+        }
+        javascript_string=sentenceCase(javascript_string);
+        console.log('modified='+javascript_string);
+
+        $.post("/answer",{
+          javascript_content: javascript_string
+          
+         });
+        if(transcript.includes('exit')){
+          //recognition.interimResults=false;
+          //recognition.abort();
+          console.log('Microphone has been stopped');
+          
+        }
+
+      
+      }
+ 
+      recognition.addEventListener('end',recognition.start);
+     
+
+      btn.addEventListener('click',()=>{
+        recognition.start();
+
+
+
+      })
+
+      const click=(event)=>{
+        console.log(event+'clicked');
+      }
+
+      const genPDF=()=>{
+      let doc=new jsPDF();
+      doc.fromHTML($('#pdf').get(0),0,0,{'width':100});
+      let randString=Math.random();
+      doc.save(randString+'static/pres.pdf');
+      console.log(randString);
+
+      //rendering the pdf inside the canvas
+      //load pdf file : this method return a promise
+      pdfjsLib.getDocument('0.12800562831277573_pres.pdf').then(pdffile=>{
+       console.log('This page has'+pdffile._pdfInfo.numPages+" Pages");
+      }); 
+     
+      
+
+      }
+    
+  </script>
+
+</html>
+
+<!-- 
+var javascript_content=null;
+var javascript_string="";
+btn= document.querySelector('.microphone');
+const SpeechRecognition= window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.interimResults=true;
+recognition.onstart=()=>{
+  console.log('Microphone has beeen activated you can ask now');
+}
+recognition.onresult=(event)=>{
+  console.log(event.results[0][0].transcript);
+  javascript_string+= (event.results[0][0].transcript+" ");
+  console.log(javascript_string);
+    $.post( "/answer", {
+        javascript_content: javascript_string
+     });
+  document.querySelector('.content').textContent=javascript_string;
+}
+    
+btn.addEventListener('click',()=>{
+  recognition.start();
+
+}); -->
